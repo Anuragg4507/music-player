@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>music player</title>
+    <link rel="shortcut icon" href="./image/Deewaniyat.jpg" type="image/jpg">
+    <link rel="stylesheet" href="style .css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+  <div class="player-container">
+    <div class="img-container">
+        <img src="./image/Deewaniyat.jpg" alt="Album Art">
+        
+    </div>
+    <h2 id="title">Trending song</h2>
+    <h3 id="artist">Anurag singh</h3>
+    <audio src="./audio/Deewaniyat .mp3" ></audio>
+
+    <div class="progress-container" id="progress-container">
+     <div class="process" id="process"></div>
+     <div class="duration-wrapper">
+        <span id="current-time">0:00</span>
+        <span id="duration">3:45</span>    </div>
+    </div>
+
+     <div class="player-controls">
+        <i class="fas fa-backward" id="prev" title="previous"></i>
+        <i class="fas fa-play main-button " id="play" title="play"></i>
+        <i class="fas fa-forward" id="next" title="next"></i>
+     </div>
+  </div>
+    <script src="javascripts"></script>
+</body>
+</html>

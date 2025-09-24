@@ -1,0 +1,254 @@
+const image = document.querySelector('img');
+const title = document.querySelector('tilte');
+const artist = document.querySelector('artist');
+const music = document.querySelector('audio');
+
+const currentTime1 = document.getElementById('current-time');
+const duration1 = document.getElementById('duration');
+const progress = document.getElementById('progress');
+const progressContainer = document.getElementById('progress-container');
+
+const prevBtn= document.getElementById('prev');
+const playBtn= document.getElementById('play');
+const nextBtn= document.getElementById('next');
+
+
+// music
+
+const songs =[
+    {
+        name:'music1',
+        displayName :"Education For Nation",
+        artist : "Anuarg singh"
+
+    },
+
+    {
+        name:'music2',
+        displayName :"Education For Nation",
+        artist : "Anuarg singh"
+
+    },
+
+    {
+        name:'music3',
+        displayName :"Education For Nation",
+        artist : "Anuarg singh"
+
+    },
+]
+
+// check if playing
+let isplaying = false
+
+// play
+
+function playsong(){
+    isplaying = true;
+    playBtn.classList.replace ('fa-play','fa-pause');
+    playBtn.setAttribute('title','pause');
+    music.play()
+}
+
+// pause
+ 
+function pausesong(){
+ isplaying = false;
+    playBtn.classList.replace ('fa-pause','fa-play');
+    playBtn.setAttribute('title','play');
+    music.pause()
+}
+
+// play or pause event listner
+
+playBtn.addEventListener('click',()=>(isplaying?pausesong():playsong()));
+
+// update Dom
+
+function loadsong(song){
+    title.textContent = song.displayName;
+    artist.textContent = song.artist;
+    music.src = 'audio/${song.name}.mp3';
+    image.src = 'image/${song.name}.jpg';
+}
+
+// current song 
+
+let songIndex = 0;
+
+// previous song
+
+function prevsong(){
+    songIndex--;
+    if(songIndex < 0 ){
+        songIndex = songs.length -1;
+    }
+    loadsong(songs[songIndex]);
+    playsong();
+}
+
+// next song
+
+function nextsong(){
+    songIndex++;
+    if(songIndex > songs.length -1){
+        songIndex = 0;
+    }
+    loadsong(songs[songIndex]);
+    playsong();
+}
+
+// onload - select first song
+loadsong(songs[songIndex])
+
+// update progress bar & time 
+
+function updateprogressBase(e){
+    if (isplaying){
+        const{duration,currentTime} = e.srcElement;
+
+        // update progress bar width 
+        const progresspercent =(currentTime/duration)*100;
+        progress.style.width = '${progresspercent}%';
+
+        // calculate display or duration
+
+        const durationMinutes =Math.floor(duration/60);
+        let durationSecond = Math.floor(duration%60);
+        if (durationSecond< 10){
+            durationSecond = '0${durationSeconds}';
+        }
+
+        // delay switching duration element to avoid NaN
+        if(durationSecond){
+            duration1.textContent = '${durationMinutes}:${durationSecond}';
+        }
+
+        // display and cconst playBtn = document.getElementById('play');
+const prevBtn = document.getElementById('prev');
+const nextBtn = document.getElementById('next');
+
+const audio = document.querySelector('audio');
+const title = document.getElementById('title');
+const artist = document.getElementById('artist');
+const image = document.querySelector('.img-container img');
+
+const progressContainer = document.getElementById('progress-container');
+const progress = document.getElementById('process');
+const currentTimeEl = document.getElementById('current-time');
+const durationEl = document.getElementById('duration');
+
+let isPlaying = false;
+
+const songs = [
+  {
+    name: 'Deewaniyat',
+    title: 'Trending Song',
+    artist: 'Anurag Singh'
+  }
+];
+
+let songIndex = 0;
+
+function loadSong(song) {
+  title.textContent = song.title;
+  artist.textContent = song.artist;
+  audio.src = `audio/${song.name}.mp3`;
+  image.src = `image/${song.name}.jpg`;
+}
+
+function playSong() {
+  isPlaying = true;
+  playBtn.querySelector('i').classList.replace('fa-play', 'fa-pause');
+  playBtn.setAttribute('title', 'Pause');
+  audio.play().catch((err) => {
+    console.error("Play failed:", err);
+  });
+}
+
+function pauseSong() {
+  isPlaying = false;
+  playBtn.querySelector('i').classList.replace('fa-pause', 'fa-play');
+  playBtn.setAttribute('title', 'Play');
+  audio.pause();
+}
+
+playBtn.addEventListener('click', () => {
+  isPlaying ? pauseSong() : playSong();
+});
+
+function prevSong() {
+  songIndex = (songIndex - 1 + songs.length) % songs.length;
+  loadSong(songs[songIndex]);
+  playSong();
+}
+
+function nextSong() {
+  songIndex = (songIndex + 1) % songs.length;
+  loadSong(songs[songIndex]);
+  playSong();
+}
+
+function updateProgressBar(e) {
+  const { duration, currentTime } = e.srcElement;
+  const progressPercent = (currentTime / duration) * 100;
+  progress.style.width = `${progressPercent}%`;
+
+  currentTimeEl.textContent = formatTime(currentTime);
+  durationEl.textContent = formatTime(duration);
+}
+
+function setProgressBar(e) {
+  const width = this.clientWidth;
+  const clickX = e.offsetX;
+  const duration = audio.duration;
+  audio.currentTime = (clickX / width) * duration;
+}
+
+function formatTime(time) {
+  const minutes = Math.floor(time / 60);
+  const seconds = Math.floor(time % 60);
+  return `${minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
+}
+
+// Add audio error listener
+audio.addEventListener('error', (e) => {
+  console.error('Audio error:', e);
+});
+
+prevBtn.addEventListener('click', prevSong);
+nextBtn.addEventListener('click', nextSong);
+audio.addEventListener('timeupdate', updateProgressBar);
+progressContainer.addEventListener('click', setProgressBar);
+audio.addEventListener('ended', nextSong);
+
+loadSong(songs[songIndex]);
+currentTime 
+        const currentMinutes = Math.floor(currentTime/60);
+        let currentSeconds = Math.floor(currentTime%60);
+        if (currentSeconds < 10 ){
+            currentSeconds = '0${currentSeconds}';
+        }
+
+
+        currentTime1.textContent = '${currentMinutes}:${currentSeconds}';
+    }}
+
+
+    // set progress bar 
+
+    function setProgressBar(e){
+        const width = this.clientWidth;
+        const clickX = e.offsetX;
+        const{duration} = music;
+        music.currentTime = (clickX/width)*duration;
+    }
+
+
+
+// event listener 
+
+prevBtn.addEventListener('click',prevsong);
+nextBtn.addEventListener('click',nextsong);
+music.addEventListener('timeupdate',updateprogressBase);
+progressContainer.addEventListener('click', setProgressBar);
